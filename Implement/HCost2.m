@@ -4,15 +4,15 @@ Heuristic cost function.
 %}
 cost=0;
 if state(2,2)~=1
-    cost=cost+1;
+    cost=cost+3;
 end
 
 if state(3,2)~=2
-    cost=cost+1;
+    cost=cost+3;
 end
 
 if state(4,2)~=3
-    cost=cost+1;
+    cost=cost+3;
 end
 
 if state(4,4)~=4
@@ -20,3 +20,5 @@ if state(4,4)~=4
 end
 
 end
+
+

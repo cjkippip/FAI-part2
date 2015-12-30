@@ -102,7 +102,8 @@ a=[0 3 0 4];
 b=[1 0 0 0];
 %%
 ssss=ismember(a,A,'rows');
-
+%%
+openList=matix2decNum(startNode.State);
 
 
 

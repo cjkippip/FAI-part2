@@ -5,7 +5,7 @@ Depth-First Search
 2.no depth limitation
 %}
 
-function [depth, realTime, path] = DFS(startNode)
+function [depth, realTime, path] = DFS(startNode, goalNode)
 tic
 stack=startNode; % stack stores nodes that is unvisited
 indx=1; % index of stack
@@ -20,18 +20,14 @@ while indx > 0
     currState
 %% 
     % Estimate if get the goalNode
-    if (currNode.State(2,2)==1 && ...
-            currNode.State(3,2)==2 && ...
-            currNode.State(4,2)==3 && ...
-            currNode.State(4,4)==4)
+    if currNode.State==goalNode.State
         path=backtrack(currNode); % backtrack the path of solution
         depth=currNode.Depth;        
         realTime=toc;
         disp('have solution');
-        return  
-        
+        return       
 %     elseif(currNode.Depth<=14) % 1.with depth limitation      
-    else % 2.no depth limitation    
+    else % 2.no depth limitation  
         
         rnd=randperm(4);   
         for i=1:4
@@ -78,10 +74,7 @@ while indx > 0
 end % while end
 
 %%
-if (currNode.State(2,2)~=1 || ...
-    currNode.State(3,2)~=2 || ...
-    currNode.State(4,2)~=3 || ...
-    currNode.State(4,4)==4)
+if currNode.State~=goalNode.State
     path=backtrack(currNode);
     depth=currNode.Depth;        
     realTime=toc;

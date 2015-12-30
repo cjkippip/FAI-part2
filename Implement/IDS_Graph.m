@@ -3,7 +3,7 @@ Fundation of AI coursework part 1
 Iterative-Deepening Search
 %}
 
-function [depth, realTime, path] = IDS_Graph(startNode)
+function [depth, realTime, path] = IDS_Graph(startNode, goalNode)
 globalStartNode=startNode;
 tic
 
@@ -26,10 +26,7 @@ for depthLimit=1:16
 
     %% 
         % Estimate if get the goalNode
-        if (currNode.State(2,2)==1 && ...
-                currNode.State(3,2)==2 && ...
-                currNode.State(4,2)==3 && ...
-                currNode.State(4,4)==4)
+        if currNode.State==goalNode.State
             path=backtrack(currNode); % backtrack the path of solution
             depth=currNode.Depth;        
             realTime=toc;
@@ -82,10 +79,7 @@ for depthLimit=1:16
 end % for end
 
 %%
-if (currNode.State(2,2)~=1 || ...
-    currNode.State(3,2)~=2 || ...
-    currNode.State(4,2)~=3 || ...
-    currNode.State(4,4)==4)
+if currNode.State~=goalNode.State
     path=backtrack(currNode);
     depth=currNode.Depth;        
     realTime=toc;
