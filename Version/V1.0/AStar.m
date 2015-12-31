@@ -4,11 +4,11 @@ A-Star Search
 primary
 %}
 
-function [depth, realTime, timeC, route] = AStar(startNode, goalNode)
+function [depth, realTime, path] = AStar(startNode, goalNode)
 tic
 closList=[];
 openList=startNode;
-timeC=0;
+
 while ~isempty(openList)
     currIndx=1;
     currNode=openList(currIndx);
@@ -28,18 +28,13 @@ while ~isempty(openList)
     currFCost
     currGCost
     currState
-    timeC=timeC+1;
+    
     % Estimate if get the goalNode
     if currNode.State==goalNode.State
         path=backtrack(currNode); % backtrack the path of solution
-        route=getRoute(path);
-        depth=currNode.GCost;        
+        depth=currNode.Depth;        
         realTime=toc;
-        disp('have solution'); 
-        depth
-        realTime
-        timeC
-        route
+        disp('have solution');   
         return
     end
     
@@ -51,7 +46,7 @@ while ~isempty(openList)
     aroundNode(1)=[];% create a container to save around nodes.
 %%      
     nodeAfterMoveUp = moveUp(currNode); % node after move up
-    % if it can move (CantMove==0)
+    % if it can move(CantMove==0)
     if nodeAfterMoveUp.CantMove==0
         % if the state after moving is not a member of close list
         if (~ismember(matix2decNum(nodeAfterMoveUp.State),closList))
@@ -68,7 +63,8 @@ while ~isempty(openList)
             nodeAfterMoveDown.GCost = currNode.GCost + 1; 
             aroundNode(length(aroundNode)+1)=nodeAfterMoveDown;
         end
-    end 
+    end
+    
 %%   
     nodeAfterMoveLeft = moveLeft(currNode);
     if nodeAfterMoveLeft.CantMove==0
@@ -78,6 +74,7 @@ while ~isempty(openList)
             aroundNode(length(aroundNode)+1)=nodeAfterMoveLeft;
         end
     end
+    
 %%      
     nodeAfterMoveRight = moveRight(currNode);
     if nodeAfterMoveRight.CantMove==0
@@ -86,7 +83,8 @@ while ~isempty(openList)
             nodeAfterMoveRight.GCost = currNode.GCost + 1; 
             aroundNode(length(aroundNode)+1)=nodeAfterMoveRight;
         end
-    end    
+    end
+    
 %%    
     for i=1:length(aroundNode)
         flag=1;
@@ -97,13 +95,13 @@ while ~isempty(openList)
         end
         
         if flag==1% if node is not in open list
-            aroundNode(i).FCost=FCost1(aroundNode(i));
+            aroundNode(i).FCost=aroundNode(i).GCost+HCost(aroundNode(i).State);
             openList(length(openList)+1)=aroundNode(i);% add in open list
         end
     end 
 end % while end
 %%
-if ~isequal(currNode.State,goalNode.State)
+if currNode.State~=goalNode.State
     path=backtrack(currNode);
     depth=currNode.Depth;        
     realTime=toc;

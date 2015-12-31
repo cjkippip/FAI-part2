@@ -4,13 +4,13 @@ Depth-First Search Graph
 1.with depth limitation   
 2.no depth limitation
 %}
-function [depth, realTime, timeC, route] = DFS_Graph(startNode, goalNode)
+function [depth, realTime, path] = DFS_Graph(startNode, goalNode)
 
 tic
 visited={}; % null cell
 stack=startNode; % stack stores nodes that is unvisited
 indx=1; % index of stack
-timeC=0;
+
 while indx > 0
     currNode=stack(indx);
     indx=indx - 1; % remove visited node
@@ -20,21 +20,16 @@ while indx > 0
     currState=currNode.State;
     currDepth
     currState
-    timeC=timeC+1;
+    
 %% 
     % Estimate if get the goalNode
     if currNode.State==goalNode.State
         path=backtrack(currNode); % backtrack the path of solution
-        route=getRoute(path);
-        depth=currNode.Depth; 
+        depth=currNode.Depth;        
         realTime=toc;
         disp('have solution');
-        depth
-        realTime
-        timeC
-        route
         return      
-    elseif(currNode.Depth<=12) % 1.with depth limitation    
+    elseif(currNode.Depth<=15) % 1.with depth limitation    
 %     else % 2.no depth limitation
 
         nodeAfterMoveUp = moveUp(currNode); % node after move up
@@ -78,7 +73,7 @@ while indx > 0
 end
 
 %%
-if ~isequal(currNode.State,goalNode.State)
+if currNode.State~=goalNode.State
     path=backtrack(currNode);
     depth=currNode.Depth;        
     realTime=toc;

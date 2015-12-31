@@ -3,12 +3,12 @@ Fundation of AI coursework part 1
 Breadth-First Search
 %}
 
-function [depth, realTime, timeC, route] = BFS(startNode, goalNode)
+function [depth, realTime, path] = BFS(startNode, goalNode)
 tic
 queue=startNode; % stack stores nodes that is unvisited
 startNode.Parent=[];
 indx=1;
-timeC=0;
+
 while indx <= length(queue)
     currNode=queue(indx);
     indx=indx + 1; 
@@ -17,19 +17,14 @@ while indx <= length(queue)
     currState=currNode.State;
     currDepth
     currState
-    timeC=timeC+1;
+    
 %% 
     % Estimate if get the goalNode
     if currNode.State==goalNode.State
         path=backtrack(currNode); % backtrack the path of solution
-        route=getRoute(path);
         depth=currNode.Depth;        
         realTime=toc;
         disp('have solution');
-        depth
-        realTime
-        timeC
-        route
         return           
     else
         nodeAfterMoveUp = moveUp(currNode); % node after move up
@@ -64,7 +59,7 @@ while indx <= length(queue)
 end
 
 %%
-if ~isequal(currNode.State,goalNode.State)
+if currNode.State~=goalNode.State
     path=backtrack(currNode);
     depth=currNode.Depth;        
     realTime=toc;

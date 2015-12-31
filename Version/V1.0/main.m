@@ -1,14 +1,72 @@
 %{
 Fundation of AI coursework part 1
-A-Star Search
-primary
 %}
+clc
+clear
 
-function [depth, realTime, timeC, route] = AStar(startNode, goalNode)
+N=4;
+% tile(1)='A',tile(2)='B',tile(3)='C',tile(4)='G'
+tile={'A','B','C','G'};
+
+% start state
+% 1=A, 2=B, 3=C, 4=G(Agent), 0=Blank
+startState=zeros(N,N);
+% startState(4,1)=1;
+% startState(4,2)=2;
+% startState(4,3)=3;
+% startState(4,4)=4;
+
+% startState(4,4)=1;
+% startState(1,1)=2;
+% startState(1,4)=3;
+% startState(2,1)=4;
+
+startState(1,1)=1;
+startState(1,3)=2;
+startState(2,3)=3;
+startState(2,1)=4;
+startNode=node(startState);
+
+% goal state
+goalState=zeros(N,N);
+goalState(2,2)=1;
+goalState(3,2)=2;
+goalState(4,2)=3;
+goalState(4,4)=4;
+goalNode=node(goalState);
+
+% show start and goal state
+startState
+goalState
+
+%%
+%{
+Different search methods. Every first line is comment.
+Every second line is code. Uncomment the code line to execute.
+%}
+%%
+% Depth-First Search Graph
+% [depth, realTime, path] = DFS_Graph(startNode, goalNode);
+%%
+% Depth-First Search
+% [depth, realTime, path] = DFS(startNode, goalNode);
+%%
+% Breadth-First Search Graph
+% [depth, realTime, path] = BFS_Graph(startNode, goalNode);
+%%
+% Breadth-First Search 
+% [depth, realTime, path] = BFS(startNode, goalNode);
+%%
+% Iterative-Deepening Search
+% [depth, realTime, path] = IDS_Graph(startNode, goalNode);
+%%
+% A-Star Search
+% [depth, realTime, path] = AStar(startNode, goalNode);
+%%
 tic
 closList=[];
 openList=startNode;
-timeC=0;
+
 while ~isempty(openList)
     currIndx=1;
     currNode=openList(currIndx);
@@ -28,18 +86,13 @@ while ~isempty(openList)
     currFCost
     currGCost
     currState
-    timeC=timeC+1;
+    
     % Estimate if get the goalNode
     if currNode.State==goalNode.State
         path=backtrack(currNode); % backtrack the path of solution
-        route=getRoute(path);
-        depth=currNode.GCost;        
+        depth=currNode.Depth;        
         realTime=toc;
-        disp('have solution'); 
-        depth
-        realTime
-        timeC
-        route
+        disp('have solution');   
         return
     end
     
@@ -51,7 +104,7 @@ while ~isempty(openList)
     aroundNode(1)=[];% create a container to save around nodes.
 %%      
     nodeAfterMoveUp = moveUp(currNode); % node after move up
-    % if it can move (CantMove==0)
+    % if it can move(CantMove==0)
     if nodeAfterMoveUp.CantMove==0
         % if the state after moving is not a member of close list
         if (~ismember(matix2decNum(nodeAfterMoveUp.State),closList))
@@ -97,18 +150,18 @@ while ~isempty(openList)
         end
         
         if flag==1% if node is not in open list
+%             aroundNode(i).FCost=aroundNode(i).GCost+HCost2(aroundNode(i).State);
             aroundNode(i).FCost=FCost1(aroundNode(i));
             openList(length(openList)+1)=aroundNode(i);% add in open list
         end
     end 
 end % while end
 %%
-if ~isequal(currNode.State,goalNode.State)
+if currNode.State~=goalNode.State
     path=backtrack(currNode);
     depth=currNode.Depth;        
     realTime=toc;
     disp('no solution');
 end  
-end 
 
 

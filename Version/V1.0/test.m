@@ -104,10 +104,9 @@ b=[1 0 0 0];
 ssss=ismember(a,A,'rows');
 %%
 openList=matix2decNum(startNode.State);
-%%
-if ~isequal(currNode.State,goalNode.State)
-    disp('no solution');
-end 
+
+
+
 
 
 

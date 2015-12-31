@@ -1,12 +1,16 @@
 classdef node
+%{
+Class node
+Reference:https://github.com/Icarurs/matlab-8-puzzle/blob/master/puzzle.m
+%}
     properties
         State
         Depth
         FCost
-        GCost
+        GCost    
+        CantMove
         Direction
         Parent
-        CantMove
     end
 %%    
     methods
@@ -16,45 +20,50 @@ classdef node
             nodeData.FCost=0;
             nodeData.GCost=0;
             nodeData.CantMove=0;
+            nodeData.Direction='none';
         end
              
-        function obj = moveUp(obj)
-            [row,col]=find(obj.State==4);
+        function obNode = moveUp(obNode)
+            [row,col]=find(obNode.State==4);
             if row>=2 % in this condition, node can move
-                obj.State(row,col)=obj.State(row-1,col);
-                obj.State(row-1,col)=4;
+                obNode.State(row,col)=obNode.State(row-1,col);
+                obNode.State(row-1,col)=4;
+                obNode.Direction='Up';
             else % out of boundary, CantMove=1
-                obj.CantMove=1;
+                obNode.CantMove=1;
             end
         end 
            
-        function obj = moveDown(obj)
-            [row,col]=find(obj.State==4);
+        function obNode = moveDown(obNode)
+            [row,col]=find(obNode.State==4);
             if row<=3
-                obj.State(row,col)=obj.State(row+1,col);
-                obj.State(row+1,col)=4;
+                obNode.State(row,col)=obNode.State(row+1,col);
+                obNode.State(row+1,col)=4;
+                obNode.Direction='Down';
             else
-                obj.CantMove=1;
+                obNode.CantMove=1;
             end
         end 
         
-        function obj = moveLeft(obj)
-            [row,col]=find(obj.State==4);
+        function obNode = moveLeft(obNode)
+            [row,col]=find(obNode.State==4);
             if col>=2
-                obj.State(row,col)=obj.State(row,col-1);      
-                obj.State(row,col-1)=4;
+                obNode.State(row,col)=obNode.State(row,col-1);      
+                obNode.State(row,col-1)=4;
+                obNode.Direction='Left';
             else
-                obj.CantMove=1;
+                obNode.CantMove=1;
             end
         end 
         
-        function obj = moveRight(obj)
-            [row,col]=find(obj.State==4);
+        function obNode = moveRight(obNode)
+            [row,col]=find(obNode.State==4);
             if col<=3
-                obj.State(row,col)=obj.State(row,col+1);    
-                obj.State(row,col+1)=4;
+                obNode.State(row,col)=obNode.State(row,col+1);    
+                obNode.State(row,col+1)=4;
+                obNode.Direction='Right';
             else
-                obj.CantMove=1;
+                obNode.CantMove=1;
             end
         end         
     end   
