@@ -9,13 +9,13 @@ tic
 timeC=0;
 for depthLimit=1:16
     visited={}; % null cell
-    stack=globalStartNode; % stack stores nodes that is unvisited
-    indx=length(stack); % index of stack
-    endNodes=stack;% last leaf nodes for every depth limitation 
+    myStack=globalStartNode; % stack stores nodes that is unvisited
+    indx=length(myStack); % index of stack
+    endNodes=myStack;% last leaf nodes for every depth limitation 
     endNodesIndx=1;
 
     while indx > 0
-        currNode=stack(indx);
+        currNode=myStack(indx);
         indx=indx - 1; % remove visited node
         visited{1,length(visited)+1} = currNode.State; % add visited node
         % show the process
@@ -32,9 +32,9 @@ for depthLimit=1:16
             depth=currNode.Depth;        
             realTime=toc;
             disp('have solution');
-            depth
-            realTime
-            timeC
+            disp(['Current node depth: ',num2str(depth)]);
+            disp(['Actual time: ',num2str(realTime)]);
+            disp(['Time complexity: ',num2str(timeC)]);
             route
             return            
         elseif(currNode.Depth<=depthLimit) % 1.with depth limitation
@@ -46,7 +46,7 @@ for depthLimit=1:16
                 nodeAfterMoveUp.Parent = currNode; % parent node is current node           
                 nodeAfterMoveUp.Depth = currNode.Depth + 1;
                 indx = indx + 1;
-                stack(indx) = nodeAfterMoveUp; % push in stack            
+                myStack(indx) = nodeAfterMoveUp; % push in stack            
             end
 
             nodeAfterMoveDown = moveDown(currNode);
@@ -55,7 +55,7 @@ for depthLimit=1:16
                 nodeAfterMoveDown.Parent = currNode;
                 nodeAfterMoveDown.Depth = currNode.Depth + 1;
                 indx = indx + 1;
-                stack(indx) = nodeAfterMoveDown;        
+                myStack(indx) = nodeAfterMoveDown;        
             end  
 
             nodeAfterMoveLeft = moveLeft(currNode);
@@ -64,7 +64,7 @@ for depthLimit=1:16
                 nodeAfterMoveLeft.Parent = currNode;
                 nodeAfterMoveLeft.Depth = currNode.Depth + 1;
                 indx = indx + 1;
-                stack(indx) = nodeAfterMoveLeft;
+                myStack(indx) = nodeAfterMoveLeft;
             end
 
             nodeAfterMoveRight = moveRight(currNode);
@@ -73,7 +73,7 @@ for depthLimit=1:16
                 nodeAfterMoveRight.Parent = currNode;
                 nodeAfterMoveRight.Depth = currNode.Depth + 1;
                 indx = indx + 1;
-                stack(indx) = nodeAfterMoveRight;
+                myStack(indx) = nodeAfterMoveRight;
             end
         else
             endNodes(endNodesIndx) = currNode;
@@ -86,6 +86,7 @@ end % for end
 %%
 if ~isequal(currNode.State,goalNode.State)
     path=backtrack(currNode);
+    route=getRoute(path);
     depth=currNode.Depth;        
     realTime=toc;
     disp('no solution');

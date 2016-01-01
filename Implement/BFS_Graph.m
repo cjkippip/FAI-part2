@@ -5,13 +5,13 @@ Breadth-First Search Graph
 
 function [depth, realTime, timeC, route] = BFS_Graph(startNode, goalNode)
 tic
-queue=startNode; % stack stores nodes that is unvisited
+myQueue=startNode; % stack stores nodes that is unvisited
 startNode.Parent=[];
 visited={}; % null cell
 indx=1;
 timeC=0;
-while indx <= length(queue)
-    currNode=queue(indx);
+while indx <= length(myQueue)
+    currNode=myQueue(indx);
     indx=indx + 1; 
     visited{1,length(visited)+1} = currNode.State; % add visited node
     % show the process
@@ -28,9 +28,9 @@ while indx <= length(queue)
         depth=currNode.Depth;  
         realTime=toc;
         disp('have solution');
-        depth
-        realTime
-        timeC
+        disp(['Current node depth: ',num2str(depth)]);
+        disp(['Actual time: ',num2str(realTime)]);
+        disp(['Time complexity: ',num2str(timeC)]);
         route
         return           
     else
@@ -41,7 +41,7 @@ while indx <= length(queue)
         if(nodeAfterMoveUp.CantMove==0 && flag==0)
             nodeAfterMoveUp.Parent = currNode; % parent node is current node           
             nodeAfterMoveUp.Depth = currNode.Depth + 1;
-            queue(length(queue)+1)=nodeAfterMoveUp;
+            myQueue(length(myQueue)+1)=nodeAfterMoveUp;
         end
 
         nodeAfterMoveDown = moveDown(currNode);
@@ -49,7 +49,7 @@ while indx <= length(queue)
         if(nodeAfterMoveDown.CantMove==0 && flag==0)
             nodeAfterMoveDown.Parent = currNode;
             nodeAfterMoveDown.Depth = currNode.Depth + 1;
-            queue(length(queue)+1)=nodeAfterMoveDown;
+            myQueue(length(myQueue)+1)=nodeAfterMoveDown;
         end  
 
         nodeAfterMoveLeft = moveLeft(currNode);
@@ -57,7 +57,7 @@ while indx <= length(queue)
         if(nodeAfterMoveLeft.CantMove==0 && flag==0)
             nodeAfterMoveLeft.Parent = currNode;
             nodeAfterMoveLeft.Depth = currNode.Depth + 1;
-            queue(length(queue)+1)=nodeAfterMoveLeft;
+            myQueue(length(myQueue)+1)=nodeAfterMoveLeft;
         end
 
         nodeAfterMoveRight = moveRight(currNode);
@@ -65,7 +65,7 @@ while indx <= length(queue)
         if(nodeAfterMoveRight.CantMove==0 && flag==0)
             nodeAfterMoveRight.Parent = currNode;
             nodeAfterMoveRight.Depth = currNode.Depth + 1;
-            queue(length(queue)+1)=nodeAfterMoveRight;
+            myQueue(length(myQueue)+1)=nodeAfterMoveRight;
         end
     end
 end
@@ -73,6 +73,7 @@ end
 %%
 if ~isequal(currNode.State,goalNode.State)
     path=backtrack(currNode);
+    route=getRoute(path);
     depth=currNode.Depth;        
     realTime=toc;
     disp('no solution');

@@ -36,9 +36,9 @@ while ~isempty(openList)
         depth=currNode.GCost;        
         realTime=toc;
         disp('have solution'); 
-        depth
-        realTime
-        timeC
+        disp(['Current node depth: ',num2str(depth)]);
+        disp(['Actual time: ',num2str(realTime)]);
+        disp(['Time complexity: ',num2str(timeC)]);
         route
         return
     end
@@ -105,6 +105,7 @@ end % while end
 %%
 if ~isequal(currNode.State,goalNode.State)
     path=backtrack(currNode);
+    route=getRoute(path);
     depth=currNode.Depth;        
     realTime=toc;
     disp('no solution');
