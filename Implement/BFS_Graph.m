@@ -7,13 +7,14 @@ function [depth, realTime, timeC, route] = BFS_Graph(startNode, goalNode)
 tic
 myQueue=startNode; % stack stores nodes that is unvisited
 startNode.Parent=[];
-visited={}; % null cell
+visited=[]; % null vector
 indx=1;
-timeC=0;
+timeC=0; % time complexity
 while indx <= length(myQueue)
     currNode=myQueue(indx);
     indx=indx + 1; 
-    visited{1,length(visited)+1} = currNode.State; % add visited node
+    visitedDecNum=matix2decNum(currNode.State);
+    visited(length(visited)+1) = visitedDecNum; % add visited node
     % show the process
     currDepth=currNode.Depth;
     currState=currNode.State;

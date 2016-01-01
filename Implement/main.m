@@ -23,17 +23,17 @@ Different search methods. Every first line is comment.
 Every second line is code. Uncomment the code line to execute.
 %}
 %%
-% Depth-First Search
-% [depth, realTime, timeC, route] = DFS(startNode, goalNode);
-%%
-% Depth-First Search Graph
-% [depth, realTime, timeC, route] = DFS_Graph(startNode, goalNode);
-%%
 % Breadth-First Search 
 % [depth, realTime, timeC, route] = BFS(startNode, goalNode);
 %%
 % Breadth-First Search Graph
-[depth, realTime, timeC, route] = BFS_Graph(startNode, goalNode);
+% [depth, realTime, timeC, route] = BFS_Graph(startNode, goalNode);
+%%
+% Depth-First Search
+% [depth, realTime, timeC, route] = DFS(startNode, goalNode);
+%%
+% Depth-Limited Search Graph
+% [depth, realTime, timeC, route] = DLS(startNode, goalNode);
 %%
 % Iterative-Deepening Search
 % [depth, realTime, timeC, route] = IDS(startNode, goalNode);
@@ -42,6 +42,5 @@ Every second line is code. Uncomment the code line to execute.
 % [depth, realTime, timeC, route] = IDS_Graph(startNode, goalNode);
 %%
 % A-Star Search
-% [depth, realTime, timeC, route] = AStar(startNode, goalNode);
+[depth, realTime, timeC, route] = AStar(startNode, goalNode);
 %%
-

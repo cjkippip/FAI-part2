@@ -1,9 +1,9 @@
 %{
 Fundation of AI coursework part 1
-Depth-First Search 
+Depth-Limited Search 
 %}
 
-function [depth, realTime, timeC, route] = DFS(startNode, goalNode)
+function [depth, realTime, timeC, route] = DLS(startNode, goalNode)
 tic
 myStack=startNode; % stack stores nodes that is unvisited
 indx=1; % index of stack
@@ -28,11 +28,9 @@ while indx > 0
         disp(['Current node depth: ',num2str(depth)]);
         disp(['Actual time: ',num2str(realTime)]);
         disp(['Time complexity: ',num2str(timeC)]);
-        disp(['length of route: ',num2str(length(route))]);
-        return
-    elseif currNode.Depth>60000
-        break;
-    else % no depth limitation         
+        route
+        return       
+    elseif(currNode.Depth<=11) % with depth limitation            
         rnd=randperm(4);   
         for i=1:4
             switch(rnd(i))
@@ -85,9 +83,6 @@ if ~isequal(currNode.State,goalNode.State)
     depth=currNode.Depth;        
     realTime=toc;
     disp('no solution');
-    disp(['Current node depth: ',num2str(depth)]);
-    disp(['Actual time: ',num2str(realTime)]);
-    disp(['Time complexity: ',num2str(timeC)]);
 end
 
 end

@@ -8,7 +8,7 @@ tic
 myQueue=startNode; % stack stores nodes that is unvisited
 startNode.Parent=[];
 indx=1;
-timeC=0;
+timeC=0; % time complexity
 while indx <= length(myQueue)
     currNode=myQueue(indx);
     indx=indx + 1; 

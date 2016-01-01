@@ -9,17 +9,35 @@ startState=zeros(N,N);
 % startState(4,3)=3;
 % startState(4,1)=4;
 
+% diff=5
+% startState(2,2)=1;
+% startState(3,2)=2;
+% startState(4,3)=3;
+% startState(2,1)=4;
+
 % diff=6
 % startState(2,2)=1;
 % startState(3,2)=2;
 % startState(4,3)=3;
 % startState(1,1)=4;
 
+% diff=8
+% startState(2,2)=1;
+% startState(3,2)=2;
+% startState(4,3)=3;
+% startState(1,3)=4;
+
 % diff=10
-startState(2,1)=1;
-startState(4,2)=2;
-startState(4,3)=3;
-startState(4,4)=4;
+% startState(2,1)=1;
+% startState(4,2)=2;
+% startState(4,3)=3;
+% startState(4,4)=4;
+
+% diff=12
+% startState(1,3)=1;
+% startState(4,2)=2;
+% startState(4,3)=3;
+% startState(4,4)=4;
 
 % diff=14
 % startState(4,1)=1;
@@ -28,10 +46,10 @@ startState(4,4)=4;
 % startState(4,4)=4;
 
 % diff=16(original)
-% startState(4,1)=1;
-% startState(4,2)=2;
-% startState(4,3)=3;
-% startState(4,4)=4;
+startState(4,1)=1;
+startState(4,2)=2;
+startState(4,3)=3;
+startState(4,4)=4;
 
 % diff=18
 % startState(4,1)=1;

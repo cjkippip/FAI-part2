@@ -5,7 +5,7 @@ Iterative-Deepening Search Graph
 
 function [depth, realTime, timeC, route] = IDS(startNode, goalNode)
 tic
-timeC=0;
+timeC=0; % time complexity
 for depthLimit=1:100000
     myStack=startNode; % stack stores nodes that is unvisited
     indx=1; % index of stack

@@ -7,14 +7,15 @@ Depth-First Search Graph
 function [depth, realTime, timeC, route] = DFS_Graph(startNode, goalNode)
 
 tic
-visited={}; % null cell
+visited=[]; % null vector
 myStack=startNode; % stack stores nodes that is unvisited
 indx=1; % index of stack
-timeC=0;
+timeC=0; % time complexity
 while indx > 0
     currNode=myStack(indx);
     indx=indx - 1; % remove visited node
-    visited{1,length(visited)+1} = currNode.State; % add visited node
+    visitedDecNum=matix2decNum(currNode.State);
+    visited(length(visited)+1) = visitedDecNum; % add visited node
     % show the process
     currDepth=currNode.Depth;
     currState=currNode.State;
@@ -34,7 +35,7 @@ while indx > 0
         disp(['Time complexity: ',num2str(timeC)]);
         route
         return      
-    elseif(currNode.Depth<=12) % 1.with depth limitation    
+    elseif(currNode.Depth<=17) % 1.with depth limitation    
 %     else % 2.no depth limitation
 
         nodeAfterMoveUp = moveUp(currNode); % node after move up

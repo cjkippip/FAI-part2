@@ -4,5 +4,7 @@ F = G + H.
 %}
 
 % GCost=1+factor*(node.GCost-1);
+
+
 end
 

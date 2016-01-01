@@ -6,9 +6,9 @@ Iterative-Deepening Search Graph
 function [depth, realTime, timeC, route] = IDS_Graph(startNode, goalNode)
 globalStartNode=startNode;
 tic
-timeC=0;
-for depthLimit=1:16
-    visited={}; % null cell
+timeC=0; % time complexity
+for depthLimit=1:100000
+    visited=[]; % null vector
     myStack=globalStartNode; % stack stores nodes that is unvisited
     indx=length(myStack); % index of stack
     endNodes=myStack;% last leaf nodes for every depth limitation 
@@ -17,7 +17,8 @@ for depthLimit=1:16
     while indx > 0
         currNode=myStack(indx);
         indx=indx - 1; % remove visited node
-        visited{1,length(visited)+1} = currNode.State; % add visited node
+        visitedDecNum=matix2decNum(currNode.State);
+        visited(length(visited)+1) = visitedDecNum; % add visited node
         % show the process
         currDepth=currNode.Depth;
         currState=currNode.State;

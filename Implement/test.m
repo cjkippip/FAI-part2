@@ -108,7 +108,16 @@ openList=matix2decNum(startNode.State);
 if ~isequal(currNode.State,goalNode.State)
     disp('no solution');
 end 
-
+%%
+tic
+closList=[];
+openList=startNode;
+FCostList=[];
+FCostList(1)=FCost1(startNode);
+timeC=0; % time complexity
+%%
+currIndx=find(FCostList==min(FCostList));
+    currNode=openList(currIndx);
 
 
 
