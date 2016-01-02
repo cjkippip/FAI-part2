@@ -1,9 +1,9 @@
 %{
 Fundation of AI coursework part 1
-A-Star Search
+A-Star Search Graph
 %}
 
-function [depth, realTime, timeC, route] = AStar(startNode, goalNode)
+function [depth, realTime, timeC, route] = AStar_Graph(startNode, goalNode)
 tic
 closList=[];
 openList=startNode;
@@ -39,7 +39,8 @@ while ~isempty(openList)
         return
     end
     
-    openList(currIndx)=[];% delete current node
+    % delete current node
+    openList(currIndx)=[];
     openListDec(currIndx)=[];
     FCostList(currIndx)=[];
     

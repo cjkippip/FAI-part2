@@ -1,11 +1,10 @@
 %{
 Fundation of AI coursework part 1
-Greedy Best-First Search
+A-Star Search Tree
 %}
 
-function [depth, realTime, timeC, route] = GBFS(startNode, goalNode)
+function [depth, realTime, timeC, route] = AStar_Tree(startNode, goalNode)
 tic
-closList=[];
 openList=startNode;
 openListDec=matix2decNum(startNode.State);
 FCostList=FCost1(startNode);
@@ -39,58 +38,46 @@ while ~isempty(openList)
         return
     end
     
-    openList(currIndx)=[];% delete current node
+    % delete current node
+    openList(currIndx)=[];
     openListDec(currIndx)=[];
     FCostList(currIndx)=[];
-    
-    % move current node's state(dec number) into close list
-    closDecNum=matix2decNum(currNode.State);
-    closList(length(closList)+1)=closDecNum;
     
     aroundNode=startNode;
     aroundNode(1)=[];% create a container to save around nodes.
 %%      
     nodeAfterMoveUp = moveUp(currNode); % node after move up
     % if it can move (CantMove==0)
-    if nodeAfterMoveUp.CantMove==0
-        % if the state after moving is not a member of close list
-        if (~ismember(matix2decNum(nodeAfterMoveUp.State),closList))
+    if nodeAfterMoveUp.CantMove==0 
             nodeAfterMoveUp.Parent = currNode; % parent node is current node           
             nodeAfterMoveUp.GCost = currNode.GCost + 1; 
-            aroundNode(length(aroundNode)+1)=nodeAfterMoveUp;
-        end
+            aroundNode(length(aroundNode)+1)=nodeAfterMoveUp;   
     end  
 %%   
     nodeAfterMoveDown = moveDown(currNode); 
     if nodeAfterMoveDown.CantMove==0
-        if (~ismember(matix2decNum(nodeAfterMoveDown.State),closList))
             nodeAfterMoveDown.Parent = currNode;           
             nodeAfterMoveDown.GCost = currNode.GCost + 1; 
             aroundNode(length(aroundNode)+1)=nodeAfterMoveDown;
-        end
     end 
 %%   
     nodeAfterMoveLeft = moveLeft(currNode);
     if nodeAfterMoveLeft.CantMove==0
-        if (~ismember(matix2decNum(nodeAfterMoveLeft.State),closList))
             nodeAfterMoveLeft.Parent = currNode;         
             nodeAfterMoveLeft.GCost = currNode.GCost + 1; 
             aroundNode(length(aroundNode)+1)=nodeAfterMoveLeft;
-        end
     end
 %%      
     nodeAfterMoveRight = moveRight(currNode);
     if nodeAfterMoveRight.CantMove==0
-        if (~ismember(matix2decNum(nodeAfterMoveRight.State),closList))
             nodeAfterMoveRight.Parent = currNode;          
             nodeAfterMoveRight.GCost = currNode.GCost + 1; 
             aroundNode(length(aroundNode)+1)=nodeAfterMoveRight;
-        end
     end    
 %%    
     for i=1:length(aroundNode)
         if ~ismember(matix2decNum(aroundNode(i).State), openListDec)
-            aroundNode(i).FCost=GreedyH(aroundNode(i));
+            aroundNode(i).FCost=FCost1(aroundNode(i));
             FCostList(length(FCostList)+1)=aroundNode(i).FCost;
             openList(length(openList)+1)=aroundNode(i);% add in open list 
             openListDec(length(openList)+1)=matix2decNum(aroundNode(i).State);

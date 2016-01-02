@@ -1,20 +1,18 @@
 %{
 Fundation of AI coursework part 1
-Depth-First Search Graph
-1.with depth limitation   
-2.no depth limitation
-Uncompleted!!!!!!!
+Breadth-First Search Graph
 %}
-function [depth, realTime, timeC, route] = DFS_Graph(startNode, goalNode)
 
+function [depth, realTime, timeC, route] = BFS_Graph(startNode, goalNode)
 tic
+myQueue=startNode; % stack stores nodes that is unvisited
+startNode.Parent=[];
 visited=[]; % null vector
-myStack=startNode; % stack stores nodes that is unvisited
-indx=1; % index of stack
+indx=1;
 timeC=0; % time complexity
-while indx > 0
-    currNode=myStack(indx);
-    indx=indx - 1; % remove visited node
+while indx <= length(myQueue)
+    currNode=myQueue(indx);
+    indx=indx + 1; 
     visitedDecNum=matix2decNum(currNode.State);
     visited(length(visited)+1) = visitedDecNum; % add visited node
     % show the process
@@ -27,18 +25,16 @@ while indx > 0
     % Estimate if get the goalNode
     if currNode.State==goalNode.State
         path=backtrack(currNode); % backtrack the path of solution
-        route=getRoute(path);
-        depth=currNode.Depth; 
+        route=getRoute(path);      
+        depth=currNode.Depth;  
         realTime=toc;
         disp('have solution');
         disp(['Current node depth: ',num2str(depth)]);
         disp(['Actual time: ',num2str(realTime)]);
         disp(['Time complexity: ',num2str(timeC)]);
         route
-        return      
-    elseif(currNode.Depth<=17) % 1.with depth limitation    
-%     else % 2.no depth limitation
-
+        return           
+    else
         nodeAfterMoveUp = moveUp(currNode); % node after move up
         flag=isVisited(nodeAfterMoveUp,visited); % flag of isVisited
         % if it can move(CantMove==0) 
@@ -46,8 +42,7 @@ while indx > 0
         if(nodeAfterMoveUp.CantMove==0 && flag==0)
             nodeAfterMoveUp.Parent = currNode; % parent node is current node           
             nodeAfterMoveUp.Depth = currNode.Depth + 1;
-            indx = indx + 1;
-            myStack(indx) = nodeAfterMoveUp; % push in stack            
+            myQueue(length(myQueue)+1)=nodeAfterMoveUp;
         end
 
         nodeAfterMoveDown = moveDown(currNode);
@@ -55,8 +50,7 @@ while indx > 0
         if(nodeAfterMoveDown.CantMove==0 && flag==0)
             nodeAfterMoveDown.Parent = currNode;
             nodeAfterMoveDown.Depth = currNode.Depth + 1;
-            indx = indx + 1;
-            myStack(indx) = nodeAfterMoveDown;        
+            myQueue(length(myQueue)+1)=nodeAfterMoveDown;
         end  
 
         nodeAfterMoveLeft = moveLeft(currNode);
@@ -64,8 +58,7 @@ while indx > 0
         if(nodeAfterMoveLeft.CantMove==0 && flag==0)
             nodeAfterMoveLeft.Parent = currNode;
             nodeAfterMoveLeft.Depth = currNode.Depth + 1;
-            indx = indx + 1;
-            myStack(indx) = nodeAfterMoveLeft;
+            myQueue(length(myQueue)+1)=nodeAfterMoveLeft;
         end
 
         nodeAfterMoveRight = moveRight(currNode);
@@ -73,8 +66,7 @@ while indx > 0
         if(nodeAfterMoveRight.CantMove==0 && flag==0)
             nodeAfterMoveRight.Parent = currNode;
             nodeAfterMoveRight.Depth = currNode.Depth + 1;
-            indx = indx + 1;
-            myStack(indx) = nodeAfterMoveRight;
+            myQueue(length(myQueue)+1)=nodeAfterMoveRight;
         end
     end
 end
@@ -86,9 +78,6 @@ if ~isequal(currNode.State,goalNode.State)
     depth=currNode.Depth;        
     realTime=toc;
     disp('no solution');
-end    
+    return
+end  
 end
-
-
-
-

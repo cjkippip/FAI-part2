@@ -1,6 +1,6 @@
-function cost=FCost4(node)
+function cost=FCost1(node)
 %{ 
-Heuristic function Using Manhattan Distance 
+F = G + H. Heuristic function Using Manhattan Distance 
 to calculate the diffenece distences of 'A', 'B', 'C' and 'G'.
 %}
 
@@ -28,7 +28,12 @@ rowDiff4=abs(row4-4);
 colDiff4=abs(col4-4);
 diff4=rowDiff4+colDiff4;
 
-% summary
-cost=diff1+diff2+diff3+diff4;
+% summary(H)
+HCost=diff1+diff2+diff3+diff4;
+% G
+GCost=node.GCost;
+% F = G + H
+cost=GCost+HCost*(1+1/10000);
 
 end
+
