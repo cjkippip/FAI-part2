@@ -6,7 +6,6 @@ clear
 
 N=4;
 % 1=A, 2=B, 3=C, 4=G(Agent), 0=Blank
-
 startNode=createStartNode(N);
 
 % goal state
@@ -42,5 +41,11 @@ Every second line is code. Uncomment the code line to execute.
 % [depth, realTime, timeC, route] = IDS_Graph(startNode, goalNode);
 %%
 % A-Star Search
-[depth, realTime, timeC, route] = AStar(startNode, goalNode);
+% [depth, realTime, timeC, route] = AStar(startNode, goalNode);
 %%
+% Greedy Best-First Search
+% [depth, realTime, timeC, route] = GBFS(startNode, goalNode);
+%%
+
+
+

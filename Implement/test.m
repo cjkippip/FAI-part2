@@ -118,11 +118,109 @@ timeC=0; % time complexity
 %%
 currIndx=find(FCostList==min(FCostList));
     currNode=openList(currIndx);
+%%
+openListDec1=[1 2 3];
+openListDec2=[1 2 4];
+flag=0;
+a=ismember(openListDec1,openListDec2);
+b=ismember(1,a);
+%%
+closList1=[];
+openList1=startNode;
+openListDec1=matix2decNum(startNode.State);
+FCostList1=FCost1(startNode);
 
-
-
-
-
+closList2=[];
+openList2=goalNode;
+openListDec2=matix2decNum(goalNode.State);
+FCostList2=FCost1(goalNode);
+%%
+    currIndxs=find(FCostList1==min(FCostList1));
+    currIndx=currIndxs(1);
+    currNode=openList1(currIndx);
+    
+    % show the process 
+    currFCost=currNode.FCost;
+    currGCost=currNode.GCost;
+    currState=currNode.State;
+    currFCost
+    currGCost
+    currState
+    timeC=timeC+1;
+    
+    % Estimate if get the goalNode
+    a=ismember(openListDec1,openListDec2);
+    flag1=ismember(1,a);
+    if flag1==1
+        path=backtrack(currNode); % backtrack the path of solution
+        route=getRoute(path);
+        depth=currNode.GCost;        
+        realTime=toc;
+        disp('have solution'); 
+        disp(['Current node depth: ',num2str(depth)]);
+        disp(['Actual time: ',num2str(realTime)]);
+        disp(['Time complexity: ',num2str(timeC)]);
+        route
+        return
+    end
+    
+    openList1(currIndx)=[];% delete current node
+    openListDec1(currIndx)=[];
+    FCostList1(currIndx)=[];
+    
+    % move current node's state(dec number) into close list
+    closDecNum=matix2decNum(currNode.State);
+    closList1(length(closList1)+1)=closDecNum;
+ 
+    aroundNode=startNode;
+    aroundNode(1)=[];% create a container to save around nodes.
+%%      
+    nodeAfterMoveUp = moveUp(currNode); % node after move up
+    % if it can move (CantMove==0)
+    if nodeAfterMoveUp.CantMove==0
+        % if the state after moving is not a member of close list
+        if (~ismember(matix2decNum(nodeAfterMoveUp.State),closList1))
+            nodeAfterMoveUp.Parent = currNode; % parent node is current node           
+            nodeAfterMoveUp.GCost = currNode.GCost + 1; 
+            aroundNode(length(aroundNode)+1)=nodeAfterMoveUp;
+        end
+    end  
+%%   
+    nodeAfterMoveDown = moveDown(currNode); 
+    if nodeAfterMoveDown.CantMove==0
+        if (~ismember(matix2decNum(nodeAfterMoveDown.State),closList1))
+            nodeAfterMoveDown.Parent = currNode;           
+            nodeAfterMoveDown.GCost = currNode.GCost + 1; 
+            aroundNode(length(aroundNode)+1)=nodeAfterMoveDown;
+        end
+    end 
+%%   
+    nodeAfterMoveLeft = moveLeft(currNode);
+    if nodeAfterMoveLeft.CantMove==0
+        if (~ismember(matix2decNum(nodeAfterMoveLeft.State),closList1))
+            nodeAfterMoveLeft.Parent = currNode;         
+            nodeAfterMoveLeft.GCost = currNode.GCost + 1; 
+            aroundNode(length(aroundNode)+1)=nodeAfterMoveLeft;
+        end
+    end
+%%      
+    nodeAfterMoveRight = moveRight(currNode);
+    if nodeAfterMoveRight.CantMove==0
+        if (~ismember(matix2decNum(nodeAfterMoveRight.State),closList1))
+            nodeAfterMoveRight.Parent = currNode;          
+            nodeAfterMoveRight.GCost = currNode.GCost + 1; 
+            aroundNode(length(aroundNode)+1)=nodeAfterMoveRight;
+        end
+    end    
+%%    
+    for i=1:length(aroundNode)
+        if ~ismember(matix2decNum(aroundNode(i).State), openListDec1)
+            aroundNode(i).FCost=FCost1(aroundNode(i));
+            FCostList1(length(FCostList1)+1)=aroundNode(i).FCost;
+            openList1(length(openList1)+1)=aroundNode(i);% add in open list 
+            openListDec1(length(openListDec1)+1)=matix2decNum(aroundNode(i).State);
+        end            
+    end 
 
 
 

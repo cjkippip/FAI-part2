@@ -1,9 +1,9 @@
 %{
 Fundation of AI coursework part 1
-A-Star Search
+Greedy Best-First Search
 %}
 
-function [depth, realTime, timeC, route] = AStar(startNode, goalNode)
+function [depth, realTime, timeC, route] = GBFS(startNode, goalNode)
 tic
 closList=[];
 openList=startNode;
@@ -90,7 +90,7 @@ while ~isempty(openList)
 %%    
     for i=1:length(aroundNode)
         if ~ismember(matix2decNum(aroundNode(i).State), openListDec)
-            aroundNode(i).FCost=FCost1(aroundNode(i));
+            aroundNode(i).FCost=FCost4(aroundNode(i));
             FCostList(length(FCostList)+1)=aroundNode(i).FCost;
             openList(length(openList)+1)=aroundNode(i);% add in open list 
             openListDec(length(openList)+1)=matix2decNum(aroundNode(i).State);
@@ -107,5 +107,3 @@ if ~isequal(currNode.State,goalNode.State)
     disp('no solution');
 end  
 end 
-
-

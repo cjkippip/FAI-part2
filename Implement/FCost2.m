@@ -1,28 +1,44 @@
-function cost=FCost2(node)
+function cost=FCost2(node,startNode)
 %{ 
-F = G + H.
+F = G + H. Heuristic function Using Manhattan Distance 
+to calculate the diffenece distences of 'A', 'B', 'C' and 'G'.
 %}
-HCost=0;
-if node.State(2,2)~=1
-    HCost=HCost+3;
-end
 
-if node.State(3,2)~=2
-    HCost=HCost+3;
-end
+[rowA,colA]=find(startNode.State==1);
+[rowB,colB]=find(startNode.State==1);
+[rowC,colC]=find(startNode.State==1);
+[rowG,colG]=find(startNode.State==1);
 
-if node.State(4,2)~=3
-    HCost=HCost+3;
-end
+% find the distance between current 1 and the goal 1.
+[row1,col1]=find(node.State==1);
+rowDiff1=abs(row1-rowA);
+colDiff1=abs(col1-colA);
+diff1=rowDiff1+colDiff1;
 
-if node.State(4,4)~=4
-    HCost=HCost+1;
-end
+% find the distance between current 2 and the goal 2.
+[row2,col2]=find(node.State==2);
+rowDiff2=abs(row2-rowB);
+colDiff2=abs(col2-colB);
+diff2=rowDiff2+colDiff2;
 
-% GCost=1+factor*(node.GCost-1);
+% find the distance between current 3 and the goal 3.
+[row3,col3]=find(node.State==3);
+rowDiff3=abs(row3-rowC);
+colDiff3=abs(col3-colC);
+diff3=rowDiff3+colDiff3;
+
+% find the distance between current 4 and the goal 4.
+[row4,col4]=find(node.State==4);
+rowDiff4=abs(row4-rowG);
+colDiff4=abs(col4-colG);
+diff4=rowDiff4+colDiff4;
+
+% summary(H)
+HCost=diff1+diff2+diff3+diff4;
+% G
 GCost=node.GCost;
-
-cost=GCost+HCost;
+% F = G + H
+cost=GCost+HCost*(1+1/10000);
 end
 
 
