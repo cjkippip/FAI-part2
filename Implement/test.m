@@ -221,6 +221,19 @@ FCostList2=FCost1(goalNode);
             openListDec1(length(openListDec1)+1)=matix2decNum(aroundNode(i).State);
         end            
     end 
+%%
+a={'a','a'};
+b={'b','b'};
+c=[a b];
+%%
+if isempty(path1(1).Parent)
+    disp('ssss');
+end
+
+
+
+
+
 
 
 

@@ -1,5 +1,5 @@
 %{
-Fundation of AI coursework part 1
+Fundation of AI coursework 
 Depth-First Search Graph
 1.with depth limitation   
 2.no depth limitation

@@ -1,5 +1,5 @@
 %{
-Fundation of AI coursework part 1
+Fundation of AI coursework 
 Iterative-Deepening Search Graph
 %}
 

@@ -1,7 +1,7 @@
-function cost=FCost2(node)
+function cost=FCost4(node)
 %{ 
-F = G + H. Heuristic function Using Manhattan Distance 
-to calculate the diffenece distences of 'A', 'B', 'C' and 'G'.
+F = G + H.
+Dynamic Weight
 %}
 
 % find the distance between current 1 and the goal 1.
@@ -33,6 +33,6 @@ HCost=diff1+diff2+diff3+diff4;
 % G
 GCost=node.GCost;
 % F = G + H
-cost=GCost+HCost;
+cost=GCost + (1+1/node.GCost) * HCost;
 
 end

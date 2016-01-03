@@ -1,6 +1,7 @@
 %{
-Fundation of AI coursework part 1
+Fundation of AI coursework 
 Depth-First Search 
+Reference: https://github.com/cjkippip/8-puzzle/blob/master/DFS.m
 %}
 
 function [depth, realTime, timeC, route] = DFS(startNode, goalNode)
@@ -33,9 +34,9 @@ while indx > 0
     elseif currNode.Depth>60000
         break;
     else % no depth limitation         
-        rnd=randperm(4);   
+        randomNums=randperm(4);   
         for i=1:4
-            switch(rnd(i))
+            switch(randomNums(i))
                 case(1)
                     nodeAfterMoveUp = moveUp(currNode); % node after move up
                     % if it can move(CantMove==0)
@@ -80,14 +81,13 @@ end % while end
 %%
 
 if ~isequal(currNode.State,goalNode.State)
-    path=backtrack(currNode);
-    route=getRoute(path);
-    depth=currNode.Depth;        
+    route='no solution';
+    depth='no solution';    
     realTime=toc;
     disp('no solution');
-    disp(['Current node depth: ',num2str(depth)]);
-    disp(['Actual time: ',num2str(realTime)]);
-    disp(['Time complexity: ',num2str(timeC)]);
+    disp('Current node depth: no solution');
+    disp('Actual time: no solution');
+    disp('Time complexity: no solution');
 end
 
 end

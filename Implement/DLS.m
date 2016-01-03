@@ -1,5 +1,5 @@
 %{
-Fundation of AI coursework part 1
+Fundation of AI coursework 
 Depth-Limited Search 
 %}
 
@@ -30,7 +30,7 @@ while indx > 0
         disp(['Time complexity: ',num2str(timeC)]);
         route
         return       
-    elseif(currNode.Depth<=11) % with depth limitation            
+    elseif(currNode.Depth<=13) % with depth limitation            
         rnd=randperm(4);   
         for i=1:4
             switch(rnd(i))
@@ -78,11 +78,13 @@ end % while end
 %%
 
 if ~isequal(currNode.State,goalNode.State)
-    path=backtrack(currNode);
-    route=getRoute(path);
-    depth=currNode.Depth;        
+    route='no solution';
+    depth='no solution';    
     realTime=toc;
     disp('no solution');
+    disp('Current node depth: no solution');
+    disp('Actual time: no solution');
+    disp('Time complexity: no solution');
 end
 
 end

@@ -1,5 +1,5 @@
 %{
-Fundation of AI coursework part 1
+Fundation of AI coursework 
 A-Star Search Graph
 %}
 
@@ -91,7 +91,7 @@ while ~isempty(openList)
 %%    
     for i=1:length(aroundNode)
         if ~ismember(matix2decNum(aroundNode(i).State), openListDec)
-            aroundNode(i).FCost=FCost1(aroundNode(i));
+            aroundNode(i).FCost=FCost3(aroundNode(i));
             FCostList(length(FCostList)+1)=aroundNode(i).FCost;
             openList(length(openList)+1)=aroundNode(i);% add in open list 
             openListDec(length(openList)+1)=matix2decNum(aroundNode(i).State);

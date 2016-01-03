@@ -4,11 +4,12 @@ Function: backtrack the path of solution
 It is an array of nodes.
 %}
     i = 1;  
-    path(i) = node;
+    path = node;
+    path(1) = [];
     while ~isempty(node.Parent)
-        node = node.Parent;
-        i = i + 1;
         path(i) = node;
+        node = node.Parent;
+        i = i + 1;        
     end
     
     path = fliplr(path);

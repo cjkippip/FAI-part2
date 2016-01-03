@@ -46,10 +46,10 @@ startState=zeros(N,N);
 % startState(4,4)=4;
 
 % diff=16(original)
-startState(4,1)=1;
-startState(4,2)=2;
-startState(4,3)=3;
-startState(4,4)=4;
+% startState(4,1)=1;
+% startState(4,2)=2;
+% startState(4,3)=3;
+% startState(4,4)=4;
 
 % diff=18
 % startState(4,1)=1;
@@ -76,10 +76,10 @@ startState(4,4)=4;
 % startState(4,4)=4;
 
 % diff=29
-% startState(4,4)=1;
-% startState(1,1)=2;
-% startState(1,4)=3;
-% startState(2,1)=4;
+startState(4,4)=1;
+startState(1,1)=2;
+startState(1,4)=3;
+startState(2,1)=4;
 
 startNode=node(startState);
 
