@@ -21,9 +21,8 @@ goalState(4,2)=3;
 goalState(4,4)=4;
 goalNode=node(goalState);
 
-%%
 % Create a table to make result clear and easy to compare
-table=cell(10,5);
+table=cell(11,5);
 % Row
 table{2,1}='BFS';
 table{3,1}='BFS_Graph';
@@ -34,6 +33,7 @@ table{7,1}='IDS_Graph';
 table{8,1}='AStar_Tree';
 table{9,1}='AStar_Graph';
 table{10,1}='GBFS';
+table{11,1}='AStarBi';
 % Column
 table{1,1}='Method';
 table{1,2}='Depth';
@@ -106,7 +106,10 @@ table{10,5}=route;
 %%
 % A-Star Bidirection Search
 [depth, realTime, timeC, route] = AStarBi(startNode, goalNode);
-
+table{11,2}=depth;
+table{11,3}=realTime;
+table{11,4}=timeC;
+table{11,5}=route;
 %%
 % see the table in workspace, which contains results
 
