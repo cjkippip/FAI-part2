@@ -1,5 +1,5 @@
 %{
-Fundation of AI coursework 
+Foundation of AI coursework 
 A-Star Search Tree
 %}
 

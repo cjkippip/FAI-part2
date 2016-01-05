@@ -1,5 +1,5 @@
 %{
-Fundation of AI coursework 
+Foundation of AI coursework 
 Depth-First Search 
 Reference: https://github.com/cjkippip/8-puzzle/blob/master/DFS.m
 %}
@@ -38,10 +38,12 @@ while indx > 0
         for i=1:4
             switch(randomNums(i))
                 case(1)
-                    nodeAfterMoveUp = moveUp(currNode); % node after move up
+                    % node after move up
+                    nodeAfterMoveUp = moveUp(currNode); 
                     % if it can move(CantMove==0)
                     if(nodeAfterMoveUp.CantMove==0)
-                        nodeAfterMoveUp.Parent = currNode; % parent node is current node           
+                        % parent node is current node  
+                        nodeAfterMoveUp.Parent = currNode;          
                         nodeAfterMoveUp.Depth = currNode.Depth + 1;
                         indx = indx + 1;
                         myStack(indx) = nodeAfterMoveUp; % push in stack            

@@ -1,5 +1,5 @@
 %{
-Fundation of AI coursework 
+Foundation of AI coursework 
 Breadth-First Search
 %}
 
@@ -35,7 +35,8 @@ while indx <= length(myQueue)
         nodeAfterMoveUp = moveUp(currNode); % node after move up
         % if it can move(CantMove==0) 
         if(nodeAfterMoveUp.CantMove==0)
-            nodeAfterMoveUp.Parent = currNode; % parent node is current node           
+            % parent node is current node
+            nodeAfterMoveUp.Parent = currNode;            
             nodeAfterMoveUp.Depth = currNode.Depth + 1;
             myQueue(length(myQueue)+1)=nodeAfterMoveUp;
         end
